@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Dashboard - FinanceHub
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<section class="dashboard">
+
+
+<h1>
+    Finance Dashboard
+</h1>
+
+
+
+<div style="text-align:right;margin-bottom:20px;">
+
+
+<a href="/export">
+
+<button>
+    Export CSV
+</button>
+
+</a>
+
+
+
+<a href="/export-pdf">
+
+<button>
+    Export PDF
+</button>
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+<!-- CARDS -->
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>Total Balance</h3>
+
+<h2>
+₹{{ balance }}
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>Total Income</h3>
+
+<h2>
+₹{{ income }}
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>Total Expenses</h3>
+
+<h2>
+₹{{ expense }}
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>Savings</h3>
+
+<h2>
+₹{{ balance }}
+</h2>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ================= BAR CHART ================= -->
+
+
+<div class="chart-box">
+
+
+<h2>
+Income vs Expense
+</h2>
+
+
+<canvas id="financeChart"></canvas>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ================= PIE CHART ================= -->
+
+
+
+<div class="chart-box">
+
+
+<h2>
+Expense Categories
+</h2>
+
+
+
+<canvas id="expenseChart"></canvas>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- ================= TRANSACTION HISTORY ================= -->
+
+
+
+<h2 style="text-align:center;color:#00ff99;">
+Transaction History
+</h2>
+
+
+
+
+
+<table style="width:90%;margin:auto;border-collapse:collapse;">
+
+
+
+<tr>
+
+<th>ID</th>
+
+<th>Date</th>
+
+<th>Category</th>
+
+<th>Type</th>
+
+<th>Amount</th>
+
+<th>Action</th>
+
+
+</tr>
+
+
+
+
+
+
+{% for transaction in transactions %}
+
+
+
+<tr>
+
+
+<td>
+{{ loop.index }}
+</td>
+
+
+
+<td>
+{{ transaction[1] }}
+</td>
+
+
+
+
+<td>
+{{ transaction[2] }}
+</td>
+
+
+
+
+<td>
+{{ transaction[3] }}
+</td>
+
+
+
+
+<td>
+₹{{ transaction[4] }}
+</td>
+
+
+
+
+<td>
+
+
+<a href="/edit/{{ transaction[0] }}">
+Edit
+</a>
+
+
+
+|
+
+
+
+<a href="/delete/{{ transaction[0] }}"
+onclick="return confirm('Delete this transaction?');">
+
+Delete
+
+</a>
+
+
+</td>
+
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+
+console.log("Chart loading");
+
+
+// BAR CHART
+
+
+const financeChart =
+document.getElementById("financeChart");
+
+
+new Chart(financeChart, {
+
+
+type:"bar",
+
+
+data:{
+
+
+labels:["Income","Expense"],
+
+
+datasets:[{
+
+label:"Amount",
+
+data:[
+{{income}},
+{{expense}}
+],
+
+backgroundColor:[
+"#00ff99",
+"#ff4444"
+]
+
+
+}]
+
+},
+
+
+options:{
+
+responsive:true
+
+}
+
+
+});
+
+
+
+
+
+// PIE CHART
+
+
+const expenseChart =
+document.getElementById("expenseChart");
+
+
+
+new Chart(expenseChart,{
+
+
+type:"pie",
+
+
+data:{
+
+
+labels:[
+
+{% for item in expense_data %}
+
+"{{item[0]}}",
+
+{% endfor %}
+
+],
+
+
+datasets:[{
+
+
+data:[
+
+
+{% for item in expense_data %}
+
+{{item[1]}},
+
+{% endfor %}
+
+
+]
+
+}]
+
+
+},
+
+
+options:{
+
+responsive:true
+
+}
+
+
+});
+
+
+
+</script>
+
+
+{% endblock %}

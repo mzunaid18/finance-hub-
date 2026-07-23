@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<section class="dashboard">
+
+
+<h1>
+My Profile
+</h1>
+
+
+
+<div class="card">
+
+
+<h3>
+Name
+</h3>
+
+<h2>
+{{ user[1] }}
+</h2>
+
+
+
+<h3>
+Email
+</h3>
+
+<h2>
+{{ user[2] }}
+</h2>
+
+
+
+</div>
+
+
+
+
+<br>
+
+
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Total Transactions
+</h3>
+
+<h2>
+{{ total_transactions }}
+</h2>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Total Income
+</h3>
+
+<h2>
+₹{{ income }}
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Total Expense
+</h3>
+
+<h2>
+₹{{ expense }}
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Balance
+</h3>
+
+<h2>
+₹{{ balance }}
+</h2>
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+{% endblock %}

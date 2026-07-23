@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+SIP Calculator - FinanceHub
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+
+<div class="container text-center">
+
+
+<h1 style="color:#00ff99;">
+SIP Calculator
+</h1>
+
+
+
+
+<div class="card p-5 mt-4"
+style="background:#1a1a1a;color:white;">
+
+
+
+
+<label>
+Monthly Investment (₹)
+</label>
+
+
+<input type="number"
+id="monthly"
+class="form-control mt-2"
+placeholder="Enter monthly investment">
+
+
+
+
+
+<br>
+
+
+
+
+<label>
+Expected Return (% per year)
+</label>
+
+
+<input type="number"
+id="returnRate"
+class="form-control mt-2"
+placeholder="Enter expected return">
+
+
+
+
+
+<br>
+
+
+
+
+<label>
+Investment Duration (Years)
+</label>
+
+
+<input type="number"
+id="years"
+class="form-control mt-2"
+placeholder="Enter years">
+
+
+
+
+
+<br>
+
+
+
+
+<button onclick="calculateSIP()">
+
+Calculate SIP
+
+</button>
+
+
+
+
+
+
+<h2 id="result"
+style="color:#00ff99;margin-top:30px;">
+
+</h2>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block scripts %}
+
+
+<script>
+
+
+function calculateSIP(){
+
+
+
+let monthly =
+Number(document.getElementById("monthly").value);
+
+
+
+let rate =
+Number(document.getElementById("returnRate").value);
+
+
+
+let years =
+Number(document.getElementById("years").value);
+
+
+
+
+
+let months = years * 12;
+
+
+
+let monthlyRate = rate / 12 / 100;
+
+
+
+
+
+let futureValue = 
+monthly *
+(
+(Math.pow(1 + monthlyRate, months) - 1)
+/
+monthlyRate
+)
+*
+(1 + monthlyRate);
+
+
+
+
+
+let invested =
+monthly * months;
+
+
+
+let returns =
+futureValue - invested;
+
+
+
+
+
+document.getElementById("result").innerHTML =
+
+
+"Invested Amount : ₹"
++ invested.toFixed(2)
+
++
+"<br>Estimated Returns : ₹"
++ returns.toFixed(2)
+
++
+"<br>Final Value : ₹"
++ futureValue.toFixed(2);
+
+
+
+}
+
+
+
+</script>
+
+
+{% endblock %}

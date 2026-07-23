@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+EMI Calculator - FinanceHub
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container text-center">
+
+
+<h1 style="color:#00ff99;">
+EMI Calculator
+</h1>
+
+
+
+<div class="card p-5 mt-4"
+style="background:#1a1a1a;color:white;">
+
+
+
+<label>
+Loan Amount (₹)
+</label>
+
+
+<input type="number"
+id="loan"
+class="form-control mt-2"
+placeholder="Enter loan amount">
+
+
+
+<br>
+
+
+
+<label>
+Interest Rate (%)
+</label>
+
+
+<input type="number"
+id="rate"
+class="form-control mt-2"
+placeholder="Enter interest rate">
+
+
+
+<br>
+
+
+
+<label>
+Loan Duration (Years)
+</label>
+
+
+<input type="number"
+id="years"
+class="form-control mt-2"
+placeholder="Enter years">
+
+
+
+<br>
+
+
+
+<button onclick="calculateEMI()">
+Calculate EMI
+</button>
+
+
+
+
+<h2 id="result"
+style="color:#00ff99;margin-top:30px;">
+</h2>
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block scripts %}
+
+
+
+<script>
+
+
+function calculateEMI(){
+
+
+let loan =
+document.getElementById("loan").value;
+
+
+let rate =
+document.getElementById("rate").value;
+
+
+let years =
+document.getElementById("years").value;
+
+
+
+let monthlyRate =
+(rate/12)/100;
+
+
+let months =
+years * 12;
+
+
+
+let emi =
+(loan * monthlyRate * Math.pow(1 + monthlyRate, months))
+/
+(Math.pow(1 + monthlyRate, months)-1);
+
+
+
+let totalPayment =
+emi * months;
+
+
+let totalInterest =
+totalPayment - loan;
+
+
+
+document.getElementById("result").innerHTML =
+
+"Monthly EMI : ₹" + emi.toFixed(2)
++
+"<br>Total Interest : ₹" 
++ totalInterest.toFixed(2)
+
++
+"<br>Total Payment : ₹"
++ totalPayment.toFixed(2);
+
+
+
+}
+
+
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,216 @@
+/* ==========================================================
+   FinanceHub Responsive Stylesheet
+   Author : Mohammed Zunaid
+========================================================== */
+
+
+/* ===============================
+   Large Screens (1200px and below)
+================================= */
+
+@media (max-width:1200px){
+
+.hero h1{
+
+    font-size:2.6rem;
+
+}
+
+}
+
+
+/* ===============================
+   Laptops (992px and below)
+================================= */
+
+@media (max-width:992px){
+
+.navbar-nav{
+
+    text-align:center;
+
+}
+
+.hero{
+
+    padding:60px 25px;
+
+}
+
+.hero h1{
+
+    font-size:2.3rem;
+
+}
+
+.hero p{
+
+    font-size:1.05rem;
+
+}
+
+.dashboard-card{
+
+    margin-bottom:20px;
+
+}
+
+}
+
+
+/* ===============================
+   Tablets (768px and below)
+================================= */
+
+@media (max-width:768px){
+
+.hero{
+
+    padding:50px 20px;
+
+}
+
+.hero h1{
+
+    font-size:2rem;
+
+}
+
+.hero p{
+
+    font-size:1rem;
+
+}
+
+.card{
+
+    margin-bottom:20px;
+
+}
+
+.btn{
+
+    width:100%;
+    margin-bottom:10px;
+
+}
+
+table{
+
+    font-size:14px;
+
+}
+
+footer{
+
+    text-align:center;
+
+}
+
+}
+
+
+/* ===============================
+   Mobile Phones (576px and below)
+================================= */
+
+@media (max-width:576px){
+
+.hero{
+
+    padding:40px 15px;
+
+}
+
+.hero h1{
+
+    font-size:1.7rem;
+
+}
+
+.hero p{
+
+    font-size:0.95rem;
+
+}
+
+.navbar-brand{
+
+    font-size:1.2rem;
+
+}
+
+.section-title{
+
+    font-size:1.5rem;
+
+}
+
+.dashboard-card{
+
+    padding:20px;
+
+}
+
+.dashboard-card h3{
+
+    font-size:1.5rem;
+
+}
+
+.form-control,
+.form-select{
+
+    font-size:15px;
+
+}
+
+table{
+
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+
+}
+
+footer h4,
+footer h5{
+
+    margin-top:20px;
+
+}
+
+}
+
+
+/* ===============================
+   Very Small Devices (400px)
+================================= */
+
+@media (max-width:400px){
+
+.hero h1{
+
+    font-size:1.5rem;
+
+}
+
+.hero p{
+
+    font-size:.9rem;
+
+}
+
+.btn{
+
+    font-size:14px;
+
+}
+
+.navbar-brand{
+
+    font-size:1rem;
+
+}
+
+}

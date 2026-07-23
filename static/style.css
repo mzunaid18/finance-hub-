@@ -1,0 +1,373 @@
+/* ================= GENERAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    background:#0f0f0f;
+    color:white;
+    font-family:'Poppins',Arial,sans-serif;
+
+}
+
+
+/* ================= NAVBAR ================= */
+
+
+nav{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background:#000;
+
+}
+
+
+
+nav h2{
+
+    color:#00ff99;
+
+}
+
+
+
+nav ul{
+
+    display:flex;
+    gap:25px;
+    list-style:none;
+
+}
+
+
+
+nav a{
+
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+
+}
+
+
+
+nav a:hover{
+
+    color:#00ff99;
+
+}
+
+
+
+
+
+/* ================= MAIN ================= */
+
+
+main{
+
+    min-height:80vh;
+    padding:40px;
+
+}
+
+
+
+
+
+/* ================= HEADINGS ================= */
+
+
+h1,h2,h3{
+
+    text-align:center;
+
+}
+
+
+
+h1{
+
+    color:#00ff99;
+    font-size:45px;
+    margin-bottom:30px;
+
+}
+
+
+
+
+
+
+
+/* ================= BUTTONS ================= */
+
+
+button{
+
+
+    background:#00ff99;
+    color:black;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:8px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:white;
+
+}
+
+
+
+
+
+/* ================= CARDS ================= */
+
+
+.cards{
+
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    margin-top:40px;
+
+
+}
+
+
+
+.card{
+
+
+    background:#1b1b1b;
+
+    width:250px;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    box-shadow:0 0 15px #000;
+
+
+}
+
+
+
+.card h3{
+
+
+    color:#00ff99;
+
+}
+
+
+
+.card h2{
+
+
+    font-size:35px;
+
+}
+
+
+
+
+
+/* ================= FORMS ================= */
+
+
+input,
+select{
+
+
+    background:#111;
+
+    color:white;
+
+    border:1px solid #00ff99;
+
+    padding:12px;
+
+    border-radius:8px;
+
+}
+
+
+
+input:focus,
+select:focus{
+
+    outline:none;
+
+    border:2px solid #00ff99;
+
+}
+
+
+
+
+
+
+/* ================= TABLE ================= */
+
+
+
+table{
+
+
+    background:#1a1a1a;
+
+    color:white;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+
+}
+
+
+
+th{
+
+    padding:15px;
+
+}
+
+
+td{
+
+    padding:12px;
+
+}
+
+
+
+
+
+/* ================= FOOTER ================= */
+
+
+footer{
+
+
+    background:#000;
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#aaa;
+
+
+}
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:768px){
+
+
+nav{
+
+    flex-direction:column;
+
+}
+
+
+
+nav ul{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+
+
+.cards{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+}
+/* ================= HOME HERO ================= */
+
+
+.hero{
+
+    text-align:center;
+
+    padding:100px 20px;
+
+}
+
+
+
+.hero h1{
+
+    font-size:55px;
+
+}
+
+
+
+.hero p{
+
+    color:#ccc;
+
+    font-size:20px;
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+}
+
+
+
+.hero button{
+
+    margin-top:30px;
+
+}

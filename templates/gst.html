@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+GST Calculator - FinanceHub
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container text-center">
+
+
+    <h1 style="color:#00ff99;">
+        GST Calculator
+    </h1>
+
+
+    <div class="card p-5 mt-4"
+    style="background:#1a1a1a;color:white;">
+
+
+
+        <label>
+            Enter Amount
+        </label>
+
+
+        <input 
+        type="number"
+        id="amount"
+        class="form-control mt-2"
+        placeholder="Enter amount">
+
+
+
+        <br>
+
+
+
+        <label>
+            GST Percentage
+        </label>
+
+
+        <select id="gst"
+        class="form-control mt-2">
+
+
+            <option value="5">
+                5%
+            </option>
+
+
+            <option value="12">
+                12%
+            </option>
+
+
+            <option value="18">
+                18%
+            </option>
+
+
+            <option value="28">
+                28%
+            </option>
+
+
+        </select>
+
+
+
+        <br>
+
+
+
+        <button onclick="calculateGST()">
+            Calculate
+        </button>
+
+
+
+        <h2 id="result"
+        style="color:#00ff99;margin-top:30px;">
+        
+        </h2>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+
+<script>
+
+
+function calculateGST(){
+
+
+    let amount =
+    document.getElementById("amount").value;
+
+
+    let gst =
+    document.getElementById("gst").value;
+
+
+
+    let gstAmount =
+    (amount * gst) / 100;
+
+
+
+    let total =
+    Number(amount) + gstAmount;
+
+
+
+    document.getElementById("result").innerHTML =
+
+    "GST Amount: ₹" + gstAmount +
+    "<br>Total Amount: ₹" + total;
+
+
+}
+
+
+
+</script>
+
+
+{% endblock %}

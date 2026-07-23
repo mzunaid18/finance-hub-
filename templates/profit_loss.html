@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Profit & Loss Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container text-center">
+
+
+<h1 style="color:#00ff99;">
+Profit & Loss Calculator
+</h1>
+
+
+
+<div class="card p-5 mt-4"
+style="background:#1a1a1a;color:white;">
+
+
+<input id="sales"
+class="form-control"
+placeholder="Total Sales">
+
+
+<br>
+
+
+<input id="cost"
+class="form-control"
+placeholder="Cost of Goods">
+
+
+<br>
+
+
+<input id="expense"
+class="form-control"
+placeholder="Other Expenses">
+
+
+<br>
+
+
+<button onclick="calculatePL()">
+Calculate
+</button>
+
+
+
+<h2 id="result"
+style="color:#00ff99;margin-top:30px;">
+</h2>
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+
+<script>
+
+
+function calculatePL(){
+
+
+let sales =
+Number(document.getElementById("sales").value);
+
+
+let cost =
+Number(document.getElementById("cost").value);
+
+
+let expense =
+Number(document.getElementById("expense").value);
+
+
+
+let gross =
+sales-cost;
+
+
+let net =
+gross-expense;
+
+
+
+document.getElementById("result").innerHTML =
+
+"Gross Profit : ₹"+gross+
+"<br>Net Profit : ₹"+net;
+
+
+
+}
+
+
+
+</script>
+
+
+{% endblock %}
