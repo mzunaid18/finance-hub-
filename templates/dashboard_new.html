@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard - FinanceHub
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+    <h1>Finance Dashboard</h1>
+
+    <div class="dashboard-actions">
+        <a href="/export" class="button-link secondary-btn">Export CSV</a>
+        <a href="/export-pdf" class="button-link secondary-btn">Export PDF</a>
+        <a href="/add" class="button-link primary-btn">+ Add Transaction</a>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Balance</h3>
+            <h2>₹{{ balance }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Income</h3>
+            <h2>₹{{ income }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Expenses</h3>
+            <h2>₹{{ expense }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Savings</h3>
+            <h2>₹{{ balance }}</h2>
+        </div>
+    </div>
+</section>
+
+<div class="chart-box">
+    <h2>Income vs Expense</h2>
+    <canvas id="financeChart"></canvas>
+</div>
+
+<div class="chart-box">
+    <h2>Expense Categories</h2>
+    <canvas id="expenseChart"></canvas>
+</div>
+
+<h2 class="section-title">Transaction History</h2>
+
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ transaction[1] }}</td>
+                <td>{{ transaction[2] }}</td>
+                <td>{{ transaction[3] }}</td>
+                <td>₹{{ transaction[4] }}</td>
+                <td>
+                    <div class="actions">
+                        <a class="action-link edit" href="/edit/{{ transaction[0] }}"><i class="fa-solid fa-pen"></i> Edit</a>
+                        <a class="action-link delete" href="/delete/{{ transaction[0] }}" onclick="return confirm('Delete this transaction?');"><i class="fa-solid fa-trash"></i> Delete</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+console.log("Chart loading");
+
+const financeChart = document.getElementById("financeChart");
+new Chart(financeChart, {
+    type: "bar",
+    data: {
+        labels: ["Income", "Expense"],
+        datasets: [{
+            label: "Amount",
+            data: [{{ income }}, {{ expense }}],
+            backgroundColor: ["#43d9ad", "#ff6b7a"]
+        }]
+    },
+    options: { responsive: true }
+});
+
+const expenseChart = document.getElementById("expenseChart");
+new Chart(expenseChart, {
+    type: "pie",
+    data: {
+        labels: [
+            {% for item in expense_data %}
+            "{{ item[0] }}",
+            {% endfor %}
+        ],
+        datasets: [{
+            data: [
+                {% for item in expense_data %}
+                {{ item[1] }},
+                {% endfor %}
+            ],
+            backgroundColor: ["#43d9ad", "#ff6b7a", "#4e7cff", "#ffcc00", "#ff8a65"]
+        }]
+    },
+    options: { responsive: true }
+});
+</script>
+{% endblock %}

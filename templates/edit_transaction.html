@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+Edit Transaction - FinanceHub
+{% endblock %}
+
 {% block content %}
 
 <section class="dashboard">
@@ -7,39 +11,42 @@
     <h1>Edit Transaction</h1>
 
     <form method="POST">
+        <label>Date</label>
+        <input type="date" name="date" value="{{ transaction[1] }}" required>
+
+        <br><br>
+
+        <label>Category</label>
+        <select name="category" required>
+            <option value="Salary" {% if transaction[2] == 'Salary' %}selected{% endif %}>Salary</option>
+            <option value="Business" {% if transaction[2] == 'Business' %}selected{% endif %}>Business</option>
+            <option value="Investment" {% if transaction[2] == 'Investment' %}selected{% endif %}>Investment</option>
+            <option value="Freelancing" {% if transaction[2] == 'Freelancing' %}selected{% endif %}>Freelancing</option>
+            <option value="Food" {% if transaction[2] == 'Food' %}selected{% endif %}>Food</option>
+            <option value="Rent" {% if transaction[2] == 'Rent' %}selected{% endif %}>Rent</option>
+            <option value="Shopping" {% if transaction[2] == 'Shopping' %}selected{% endif %}>Shopping</option>
+            <option value="Travel" {% if transaction[2] == 'Travel' %}selected{% endif %}>Travel</option>
+            <option value="Bills" {% if transaction[2] == 'Bills' %}selected{% endif %}>Bills</option>
+            <option value="Entertainment" {% if transaction[2] == 'Entertainment' %}selected{% endif %}>Entertainment</option>
+        </select>
+
+        <br><br>
 
         <label>Transaction Type</label>
-
         <select name="type">
-
-            <option value="Income"
-            {% if transaction[1] == "Income" %}selected{% endif %}>
-                Income
-            </option>
-
-            <option value="Expense"
-            {% if transaction[1] == "Expense" %}selected{% endif %}>
-                Expense
-            </option>
-
+            <option value="Income" {% if transaction[3] == 'Income' %}selected{% endif %}>Income</option>
+            <option value="Expense" {% if transaction[3] == 'Expense' %}selected{% endif %}>Expense</option>
         </select>
 
         <br><br>
 
         <label>Amount</label>
-
-        <input
-            type="number"
-            name="amount"
-            value="{{ transaction[2] }}"
-            required>
+        <input type="number" name="amount" value="{{ transaction[4] }}" required>
 
         <br><br>
 
-        <button type="submit">
-            Update Transaction
-        </button>
-
+        <button type="submit" class="primary-btn">Update Transaction</button>
+        <a class="button-link secondary-btn" href="/dashboard">Cancel</a>
     </form>
 
 </section>

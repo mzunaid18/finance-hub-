@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+FinanceHub - Home
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Your money, simplified</p>
+        <h1>Take control of every rupee.</h1>
+        <p>Track income and expenses, calculate GST, EMI, SIP, and create polished invoices from a single smart dashboard.</p>
+        <div class="hero-actions">
+            <a class="button-link primary-btn" href="/dashboard">Open Dashboard</a>
+            <a class="button-link secondary-btn" href="/register">Create Account</a>
+        </div>
+    </div>
+
+    <div class="content-card">
+        <h3>What you can do</h3>
+        <ul class="feature-list">
+            <li>Log transactions in seconds</li>
+            <li>See your balance at a glance</li>
+            <li>Use smart finance tools without leaving the app</li>
+        </ul>
+    </div>
+</section>
+
+<div class="cards">
+    <a class="feature-card" href="/dashboard">
+        <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Expense Tracking</h3>
+        <p>Monitor your income and expenses with clear summaries and charts.</p>
+        <span class="meta">Open dashboard →</span>
+    </a>
+
+    <a class="feature-card" href="/gst">
+        <div class="card-icon"><i class="fa-solid fa-receipt"></i></div>
+        <h3>GST Calculator</h3>
+        <p>Calculate GST safely and quickly for your business needs.</p>
+        <span class="meta">Try calculator →</span>
+    </a>
+
+    <a class="feature-card" href="/emi">
+        <div class="card-icon"><i class="fa-solid fa-building-columns"></i></div>
+        <h3>EMI Tools</h3>
+        <p>Estimate loan payments and make better financial decisions.</p>
+        <span class="meta">Check EMI →</span>
+    </a>
+
+    <a class="feature-card" href="/invoice">
+        <div class="card-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+        <h3>Invoice Builder</h3>
+        <p>Create professional invoices and share them with clients instantly.</p>
+        <span class="meta">Create invoice →</span>
+    </a>
+</div>
+
+{% endblock %}

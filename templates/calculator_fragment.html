@@ -1,0 +1,144 @@
+<div class="calculator-section">
+
+    <h2 class="section-title">Calculators</h2>
+
+    <div class="calc-tabs">
+        <button class="tab-btn" onclick="showCalc('gst')">GST</button>
+        <button class="tab-btn" onclick="showCalc('emi')">EMI</button>
+        <button class="tab-btn" onclick="showCalc('sip')">SIP</button>
+        <button class="tab-btn" onclick="showCalc('pl')">Profit/Loss</button>
+        <button class="tab-btn" onclick="showCalc('invoice')">Invoice</button>
+    </div>
+
+    <div id="gst" class="calc-card">
+        <h3>GST Calculator</h3>
+        <label>Enter Amount</label>
+        <input type="number" id="c_amount" class="form-control" placeholder="Enter amount">
+        <label>GST Percentage</label>
+        <select id="c_gst" class="form-control">
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18">18%</option>
+            <option value="28">28%</option>
+        </select>
+        <button onclick="calculateGST()">Calculate</button>
+        <h4 id="c_gst_result" style="color:#00ff99;margin-top:10px"></h4>
+    </div>
+
+    <div id="emi" class="calc-card" style="display:none">
+        <h3>EMI Calculator</h3>
+        <label>Loan Amount (₹)</label>
+        <input type="number" id="c_loan" class="form-control" placeholder="Enter loan amount">
+        <label>Interest Rate (%)</label>
+        <input type="number" id="c_rate" class="form-control" placeholder="Enter interest rate">
+        <label>Loan Duration (Years)</label>
+        <input type="number" id="c_years" class="form-control" placeholder="Enter years">
+        <button onclick="calculateEMI()">Calculate EMI</button>
+        <h4 id="c_emi_result" style="color:#00ff99;margin-top:10px"></h4>
+    </div>
+
+    <div id="sip" class="calc-card" style="display:none">
+        <h3>SIP Calculator</h3>
+        <label>Monthly Investment (₹)</label>
+        <input type="number" id="c_monthly" class="form-control" placeholder="Enter monthly investment">
+        <label>Expected Return (% per year)</label>
+        <input type="number" id="c_returnRate" class="form-control" placeholder="Enter expected return">
+        <label>Investment Duration (Years)</label>
+        <input type="number" id="c_years_sip" class="form-control" placeholder="Enter years">
+        <button onclick="calculateSIP()">Calculate SIP</button>
+        <h4 id="c_sip_result" style="color:#00ff99;margin-top:10px"></h4>
+    </div>
+
+    <div id="pl" class="calc-card" style="display:none">
+        <h3>Profit & Loss Calculator</h3>
+        <input id="c_sales" class="form-control" placeholder="Total Sales">
+        <input id="c_cost" class="form-control" placeholder="Cost of Goods">
+        <input id="c_expense" class="form-control" placeholder="Other Expenses">
+        <button onclick="calculatePL()">Calculate</button>
+        <h4 id="c_pl_result" style="color:#00ff99;margin-top:10px"></h4>
+    </div>
+
+    <div id="invoice" class="calc-card" style="display:none">
+        <h3>Invoice Generator</h3>
+        <input id="c_customer" class="form-control" placeholder="Customer Name">
+        <input id="c_item" class="form-control" placeholder="Item Name">
+        <input id="c_price" class="form-control" placeholder="Price">
+        <button onclick="generateInvoice()">Generate Invoice</button>
+        <h4 id="c_invoice_result" style="color:#00ff99;margin-top:10px"></h4>
+    </div>
+
+</div>
+
+<script>
+function showCalc(id){
+    document.querySelectorAll('.calc-card').forEach(c=>c.style.display='none');
+    const el = document.getElementById(id);
+    if(el) el.style.display='block';
+}
+
+function logCalculation(type, inputs, result){
+    fetch('/log_calculation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ calc_type: type, inputs: inputs, result: result })
+    }).then(r=>r.json()).catch(e=>console.log('calc log err',e));
+}
+
+function calculateGST(){
+    let amount = Number(document.getElementById('c_amount').value);
+    let gst = Number(document.getElementById('c_gst').value);
+    let gstAmount = (amount * gst) / 100;
+    let total = amount + gstAmount;
+    let text = `GST Amount: ₹${gstAmount.toFixed(2)}\nTotal: ₹${total.toFixed(2)}`;
+    document.getElementById('c_gst_result').innerHTML = text.replace('\n','<br>');
+    logCalculation('GST', {amount, gst}, {gstAmount, total});
+}
+
+function calculateEMI(){
+    let loan = Number(document.getElementById('c_loan').value);
+    let rate = Number(document.getElementById('c_rate').value);
+    let years = Number(document.getElementById('c_years').value);
+    let monthlyRate = (rate/12)/100;
+    let months = years * 12;
+    let emi = (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months)-1);
+    let totalPayment = emi * months;
+    let totalInterest = totalPayment - loan;
+    let text = `Monthly EMI: ₹${emi.toFixed(2)}\nTotal Interest: ₹${totalInterest.toFixed(2)}\nTotal Payment: ₹${totalPayment.toFixed(2)}`;
+    document.getElementById('c_emi_result').innerHTML = text.replace(/\n/g,'<br>');
+    logCalculation('EMI', {loan, rate, years}, {emi: emi.toFixed(2), totalInterest: totalInterest.toFixed(2), totalPayment: totalPayment.toFixed(2)});
+}
+
+function calculateSIP(){
+    let monthly = Number(document.getElementById('c_monthly').value);
+    let rate = Number(document.getElementById('c_returnRate').value);
+    let years = Number(document.getElementById('c_years_sip').value);
+    let months = years * 12;
+    let monthlyRate = rate / 12 / 100;
+    let futureValue = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+    let invested = monthly * months;
+    let returns = futureValue - invested;
+    let text = `Invested: ₹${invested.toFixed(2)}\nEstimated Returns: ₹${returns.toFixed(2)}\nFinal Value: ₹${futureValue.toFixed(2)}`;
+    document.getElementById('c_sip_result').innerHTML = text.replace(/\n/g,'<br>');
+    logCalculation('SIP', {monthly, rate, years}, {invested: invested.toFixed(2), returns: returns.toFixed(2), futureValue: futureValue.toFixed(2)});
+}
+
+function calculatePL(){
+    let sales = Number(document.getElementById('c_sales').value);
+    let cost = Number(document.getElementById('c_cost').value);
+    let expense = Number(document.getElementById('c_expense').value);
+    let gross = sales - cost;
+    let net = gross - expense;
+    let text = `Gross Profit: ₹${gross.toFixed(2)}\nNet Profit: ₹${net.toFixed(2)}`;
+    document.getElementById('c_pl_result').innerHTML = text.replace(/\n/g,'<br>');
+    logCalculation('ProfitLoss', {sales, cost, expense}, {gross: gross.toFixed(2), net: net.toFixed(2)});
+}
+
+function generateInvoice(){
+    let customer = document.getElementById('c_customer').value;
+    let item = document.getElementById('c_item').value;
+    let price = document.getElementById('c_price').value;
+    let text = `Invoice<br><br>Customer: ${customer}<br>Item: ${item}<br>Total Amount: ₹${price}`;
+    document.getElementById('c_invoice_result').innerHTML = text;
+    logCalculation('Invoice', {customer, item, price}, {invoiceText: text});
+}
+</script>
