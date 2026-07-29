@@ -15,23 +15,7 @@ FinanceHub is a Flask-based personal finance web app for tracking income, expens
 - Flask
 - SQLite
 - HTML, CSS, JavaScript
-- ReportLab for PDF generation
-
-## Installation
-1. Open the project folder.
-2. Create and activate a virtual environment:
-   - Windows PowerShell:
-     - `py -m venv venv`
-     - `./venv/Scripts/Activate.ps1`
-3. Install dependencies:
-   - `pip install -r requirements.txt`
-
-## Run the App
-From the project root, run:
-- `python app.py`
-
-Then open:
-- `http://127.0.0.1:5000/`
+- ReportLab 
 
 ## Notes
 - The app uses a local SQLite database file named `finance.db`.
