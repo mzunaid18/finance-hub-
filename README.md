@@ -1,23 +1,80 @@
-# FinanceHub
+💰 Finance Hub
 
-FinanceHub is a Flask-based personal finance web app for tracking income, expenses, and financial summaries. It includes user authentication, a transaction dashboard, export options, and finance calculators.
+Finance Hub is a full-stack personal finance management web application that enables users to track income, expenses, savings, and transactions through an interactive dashboard. It provides secure authentication, real-time financial insights, and a responsive user experience.
 
-## Features
-- User registration and login
-- Add, edit, and delete transactions
-- Dashboard with balance, income, expense, and charts
-- CSV and PDF export
-- GST, EMI, SIP, and profit-loss calculators
-- Dark/light theme toggle
+✨ Features
 
-## Tech Stack
-- Python 3
-- Flask
-- SQLite
-- HTML, CSS, JavaScript
-- ReportLab 
+* 🔐 Secure User Authentication
+* 📊 Interactive Dashboard
+* 💸 Income & Expense Tracking
+* 💳 Transaction Management
+* 📈 Financial Reports & Charts
+* 📱 Responsive Design
 
-## Notes
-- The app uses a local SQLite database file named `finance.db`.
-- New users can register from the Register page and then log in.
-- If you want to reset the database, delete `finance.db` and restart the app.
+🛠️ Tech Stack
+
+Frontend
+
+* React.js
+* HTML5
+* CSS3
+* JavaScript
+
+Backend
+
+* Node.js
+* Express.js
+
+Database
+
+* MongoDB
+
+Authentication
+
+* JWT (JSON Web Token)
+
+📁 Project Structure
+
+Finance-Hub/
+│
+├── client/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── context/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   └── package.json
+│
+├── server/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── server.js
+│   └── package.json
+│
+├── .env
+├── .gitignore
+└── README.md
+
+🎯 Objective
+
+The objective of Finance Hub is to provide users with a simple, secure, and efficient platform to manage personal finances while offering valuable insights into spending habits and financial performance.
+
+🚀 Future Enhancements
+
+* Budget Planning
+* AI-Based Financial Insights
+* Bill Payment Reminders
+* Export Reports (PDF/Excel)
+* Multi-Currency Support
+
+👨‍💻 Developer
+
+Mohamad Zunaid
